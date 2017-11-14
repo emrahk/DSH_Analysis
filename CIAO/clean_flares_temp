@@ -1,0 +1,25 @@
+#This program cleans flares and obtains gti file without flares
+#Before running the program a region with bright sources and halo must be obtained. In principle one can assume that halo is not variable in short timescales?
+
+#bhsources.reg includes halo as well.
+
+dmcopy "acisf19004_repro_evt2.fits[energy=500:7000,ccd_id=7]" 1630_c7.fits
+dmcopy "1630_c7.fits[exclude sky=region(bhsources.reg)]" 1630_c7_bgh.fits
+dmlist 1630_c7_bgh.fits"[GTI7]" data,clean outfile=gti7.txt
+
+#this is some work to do this automatically, skipping automatic routine. TBD
+# output of gti7: 602678085.9993665218 602717804.0847136974
+
+punlearn dmextract
+pset dmextract infile="1630_c7_bgh.fits[bin time=602678085.999:602717804.085:259.28]"
+pset dmextract outfile=1630_c7_bgh.lc
+pset dmextract opt=ltc1
+dmextract
+
+#now chips is run. can be done with deflare script as well
+
+deflare 1630_c7_bgh.lc 1630_c7_bgh_deflare.gti method=clean plot=yes
+
+#filter
+dmcopy "1630_c7.fits[@1630_c7_bgh_deflare.gti]" 1630_c7h_clean.fits
+
