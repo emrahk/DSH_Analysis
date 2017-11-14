@@ -32,5 +32,44 @@ dmcopy "acisf19004_repro_evt2.fits[events][ccd_id=7]" ccdid7_evt2.fits
 
 cp spec_script_template to your file, change src and background regions, use grppha later
 
+Results are in 4U1630_2 directory
 ===================================================================
 
+3. Fluxed images
+
+IN PRINCIPLE I CAN TRY CLEANED EVENT FILES TBD LATER
+
+   3.a. find energy ranges and weights.
+     using the panda region, setting abun angr. nh=4.75, index=3.84 norm=0.00195
+     model flux: 0.000386, each band should have 0.000129 1.5-2.36, 2.36-3.17, 3.17-5
+     using entire chip counts. 25042, each band should have 8347 counts 1.5-2.22, 2.22-3.11, 3.11-5.
+     halo direct rates: 5664/3=1888: 1.5-2.27, 2.27-3.13, 3.13-5.
+     While model and actual is slightly off, should not create a large problem.
+
+Using halo direct rates with slight modifications, 1.5-2.25, 2.25-3.15, 3.15-4.95 with the spectral properties above.
+
+      3.b. With fluximage
+
+Flux image procedure uses the same weights for all CCDs. CCD 6 and CCD7 low energy responses are not the same. Not worrying about this for now.
+
+program to get fluxed images:
+
+getfluxed_1p5_5_eq RAN at 4U1630_expoc
+
+template is copied to Analysis.
+ds9 -rgb -red band1_flux.img -green band2_flux.img -blue band3_flux.img -rgb lock scale yes -scale mode 99.5 -zoom 2
+
+===================================================================
+
+4. Get background for the same energy bands, for different chips
+
+
+   4.a cleaning
+  To be able to scale correctly with the flat backgrounds, flares must be removed. Note that cleaning is only necessary to obtain good time intervals and correct scaling. Cleaning is to remove affects of variable sources as well as flares.
+In this case halo must also be removed?
+
+Automatic routine requires hacking text gti values, not necessary at this moment, continuing with step by step routine.
+
+The routine is called clean_flares
+
+  4.b 
