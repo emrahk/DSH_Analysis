@@ -1,0 +1,18 @@
+#1.5 to 5 keV fluxed images. No clearing of possible plares. Using pie halo spectral parameters with abun angr, phabs*power, and count cuts from halo
+
+punlearn make_instmap_weights
+make_instmap_weights weights_5eq1.txt "xsphabs.gal*powlaw1d.p1" \
+      paramvals="gal.nh=4.75;p1.gamma=3.8" emin=1.5 emax=2.25 ewidth=0.15
+
+punlearn make_instmap_weights
+make_instmap_weights weights_5eq2.txt "xsphabs.gal*powlaw1d.p1" \
+      paramvals="gal.nh=4.75;p1.gamma=3.8" emin=2.25 emax=3.15 ewidth=0.15
+
+punlearn make_instmap_weights
+make_instmap_weights weights_5eq3.txt "xsphabs.gal*powlaw1d.p1" \
+      paramvals="gal.nh=4.75;p1.gamma=3.8" emin=3.15 emax=4.95 ewidth=0.3
+
+
+punlearn fluximage
+fluximage acisf19004_repro_evt2.fits fluxrgb_eq5/ bands=weights_5eq1.txt,weights_5eq2.txt,weights_5eq3.txt binsize=1
+
