@@ -1,0 +1,22 @@
+#this is a template for getting fluxed background images
+#necessary threshold applied exposure maps must have been softlinked
+#also, correctin factors must have been calculated by taking ratios of high energy background
+
+#for chip7, correction 0.071
+
+get_sky_limits band1_thresh_c7.expmap
+dmf=`pget get_sky_limits dmfilter`
+dmcopy "1630_blankh_c7.evt[energy=1500:2250][bin $dmf]" band1_back_c7.img
+dmimgcalc infile="band1_back_c7.img,band1_thresh_c7.expmap" infile2= out=band1_back_c7_fluxed.img op="imgout=(img1*0.071/img2)"
+
+get_sky_limits band2_thresh_c7.expmap
+dmf=`pget get_sky_limits dmfilter`
+dmcopy "1630_blankh_c7.evt[energy=2250:3150][bin $dmf]" band2_back_c7.img
+dmimgcalc infile="band2_back_c7.img,band2_thresh_c7.expmap" infile2= out=band2_back_c7_fluxed.img op="imgout=(img1*0.071/img2)"
+
+get_sky_limits band3_thresh_c7.expmap
+dmf=`pget get_sky_limits dmfilter`
+dmcopy "1630_blankh_c7.evt[energy=3150:5000][bin $dmf]" band3_back_c7.img
+dmimgcalc infile="band3_back_c7.img,band3_thresh_c7.expmap" infile2= out=band3_back_c7_fluxed.img op="imgout=(img1*0.071/img2)"
+
+
