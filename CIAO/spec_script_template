@@ -1,0 +1,12 @@
+punlearn specextract
+pset specextract infile="ccdid7_evt2.fits[sky=region(src8.reg)]"
+pset specextract bkgfile="ccdid7_evt2.fits[sky=region(bkg12_50.reg)]"
+pset specextract outroot=/Users/ekalemci/CHANDRA/4U1630_2/src8x2
+#pset specextract asp="pcadf602677981N001_asol1.fits"
+#pset specextract pbkfile="acisf602678076N001_pbk0.fits"
+#pset specextract mskfile="acisf19004_001N001_msk1.fits"
+#pset specextract grouptype="NUM_CTS"
+#pset specextract binspec=3
+#pset specextract bkg_grouptype=NUM_CTS
+#pset specextract bkg_binspec=3
+specextract
