@@ -72,4 +72,31 @@ Automatic routine requires hacking text gti values, not necessary at this moment
 
 The routine is called clean_flares
 
-  4.b 
+  4.b blanksky event file creation
+
+Done by blanksky_temp
+ACIS-7: 0.07103533 written to the 'BKGSCAL7' header keyword. What CIAO calculated.
+
+ 4.c blanksky_image also creates an image. Will not use it for now.
+
+========================================================================
+========================================================================
+
+ANALYSIS of the BACKGROUND
+
+PROFILE ANALYSIS STEPS
+
+1. Recreate fluxed images W/OUT flares
+
+RUN getfluxed_1p5_5_eq_noflare in 4U1630_expoc
+visual inspection: no difference.
+
+1b. Create chip 7 and chip 6 fluxed images separately
+RUN getfluxed_1p5_5_eq_noflare_c7 for chip 7
+RUN getfluxed_1p5_5_eq_noflare_c6 for chip 6
+
+2. Create fluxed images of background
+
+Need to do half manually. Each chip separately.
+
+
