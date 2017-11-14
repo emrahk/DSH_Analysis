@@ -1,0 +1,36 @@
+1. Chandra repro
+
+with standard parameters:
+
+Input directory (/Users/ekalemci/CHANDRA/data/19004/):
+Output directory (default = $indir/repro) (/Users/ekalemci/CHANDRA/4U1630/):
+Root for output filenames ():
+Create a new bad pixel file? (yes):
+Create a new level=2 event file? (yes):
+Destreak the ACIS-8 chip? (yes):
+Set ardlib.par with the bad pixel file? (yes):
+Clean ACIS background in VFAINT data? (no):
+Pixel randomization: default|edser|none|randomize (default|edser|none|randomize|centroid) (default):
+ Re-run tgdetect and tg_create_mask rather than use the Level 2 region extension? (no):
+Cleanup intermediate files on exit (yes):
+Clobber existing file (no):
+Debug Level(0-5) (0:5) (1):
+mode (ql):
+
+This step created:
+
+acisf19004_repro_evt2.fits and other files.
+pcadf602677981N001_asol1.fits copied to directory?
+
+===================================================================
+
+
+2. Spectral analysis
+
+Use single chip:
+dmcopy "acisf19004_repro_evt2.fits[events][ccd_id=7]" ccdid7_evt2.fits
+
+cp spec_script_template to your file, change src and background regions, use grppha later
+
+===================================================================
+
