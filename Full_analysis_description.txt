@@ -98,5 +98,51 @@ RUN getfluxed_1p5_5_eq_noflare_c6 for chip 6
 2. Create fluxed images of background
 
 Need to do half manually. Each chip separately.
+RUN getfluxedback_c7 (temp version in github) for c7 => rgb_back_c7
+do the same for c6, factor the same? run blanksky_image to make sure. 0.00716
+
+
+==================================================================
+==================================================================
+==================================================================
+==================================================================
+
+IDL Analysis:
+
+ getprofile.pro
+getprofile, fluxim, radius, prof, areas, AND optional parameters
+
+accepts fluxed images. (kind of stupid actually)
+uses elimpointsrc, also copied.
+
+BACKGROUND METHODS
+
+1.
+For chip 7, get inner background 20''-60'', scale using exposure map to all
+radii
+For chip 6, directly use flat outer profile as background (from 450''-550'')
+
+Up to 6keV
+output files: prof_rgbc67mrad5bc.sav (sep 17)
+wrapper: wrap_fluxed_rgb_chip67mrad5_backc, uses prof_rgbcXmrad5.sav (X=6,7)
+wrapper_origins: wrap_fluxed_rgb_chipX_mrad5
+output image: rgb_profc67mrad5bc.eps
+
+2.
+For both chips, use count profiles and assume that the background is flat (background dominated) This should give something very similar to method 1 actually.
+Tried for chip 7 only, up to 6keV
+Have not completed, but initial results show the same effect.
+
+3. Using fluxed backgrounds.
+HAVE NOT STARTED. SWITCHING TO up to 5keV.
+
+Plan for wrapper:
+
+Created CHIPvsBACKG5keV for a fresh start
+RUN getprofile for fluxed images up to 5 keV.
+Data is at:
+~/CHANDRA/4U1630_expoc/fluxrgb_eq5_deflare_c7/
+
+
 
 
