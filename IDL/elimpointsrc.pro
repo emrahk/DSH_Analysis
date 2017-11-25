@@ -92,7 +92,7 @@ IF uchip NE 0 THEN BEGIN
    psfsize=psfsize[cpin]
 ENDIF
 
-;make a cut on source significance and radiuses
+;make a cut on source significance and radii
   xx=where((sig GT threshs) AND (rad LE mrad*numann/pixs),nums)
 
   IF nums NE 0 THEN BEGIN
@@ -116,6 +116,7 @@ ENDIF
         jmax=floor(((rad[i]+usepsf)*pixs/mrad))+1
         jmin=floor(((rad[i]-usepsf)*pixs/mrad))
         ctind=where((((x-sx[i])^2.+(y-sy[i])^2.) LE usepsf^2.),ctsall) ;all pts
+IF ctsall GT 0 THEN BEGIN
         IF (useim AND (ctsall GT 0)) THEN fluxall=fluxinp[ctind]
         angs=findgen(360)*!PI/180.
         radpl1=jmin*mrad/pixs
@@ -153,7 +154,6 @@ ENDIF
               IF useim THEN BEGIN
                  IF cts EQ 0 THEN fluxp=0. ELSE fluxp=fluxall[ctindp]
               ENDIF
-              
               IF (k LT numann) THEN BEGIN
                  psc[k]=psc[k]+(ctsall-cts)
                  IF useim THEN fluxout[k]=fluxout[k]+total(fluxall)-total(fluxp)
@@ -173,8 +173,8 @@ ENDIF
                fluxall=fluxp
                totarea=midarea
                radplk=k*mrad/pixs
-               IF diag THEN   oplot,radplk*cos(angs),radplk*sin(angs)
-            ENDFOR
+               IF diag THEN   oplot,radplk*cos(angs),radplk*sin(angs)        
+            ENDFOR ;for k
               psc[jmin]=psc[jmin]+cts
               IF useim THEN fluxout[jmin]=fluxout[jmin]+total(fluxp)
             areadif[jmin]=areadif[jmin]+midarea
@@ -191,6 +191,8 @@ ENDIF
          radpl2=jmax*mrad/pixs           
 IF diag THEN oplot,radpl2*cos(angs),radpl2*sin(angs)
 IF diag THEN stop
+
+ENDIF ;ctsall
 
     ENDFOR
      
