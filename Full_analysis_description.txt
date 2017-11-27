@@ -48,6 +48,9 @@ IN PRINCIPLE I CAN TRY CLEANED EVENT FILES TBD LATER
 
 Using halo direct rates with slight modifications, 1.5-2.25, 2.25-3.15, 3.15-4.95 with the spectral properties above.
 
+THE RESULTS ACTUALLY DOES NOT LOOK GOOD, 2.25-3:15 is much larger than others.
+I may redo the energy ranges.
+
       3.b. With fluximage
 
 Flux image procedure uses the same weights for all CCDs. CCD 6 and CCD7 low energy responses are not the same. Not worrying about this for now.
@@ -112,7 +115,7 @@ IDL Analysis:
  getprofile.pro
 getprofile, fluxim, radius, prof, areas, AND optional parameters
 
-accepts fluxed images. (kind of stupid actually)
+accepts fluxed images. (kind of stupid actually). Worse it uses image coordinates. I have to rewrite it.
 uses elimpointsrc, also copied.
 
 BACKGROUND METHODS
@@ -138,11 +141,50 @@ HAVE NOT STARTED. SWITCHING TO up to 5keV.
 
 Plan for wrapper:
 
+For 5keV:
+background method 1:
 Created CHIPvsBACKG5keV for a fresh start
 RUN getprofile for fluxed images up to 5 keV.
 Data is at:
-~/CHANDRA/4U1630_expoc/fluxrgb_eq5_deflare_c7/
+~/CHANDRA/4U1630_expoc/fluxrgb_eq5_deflare_c7,_c6/
+running
+wrap_fluxed_rgb_chipX_mrad5_flb in the new directory
+running
+wrap_fluxed_rgb_chip67mrad5_flb
+
+despite overcuts on chip 7, background exits. need to have extra background component for this case.
+
+skkipping method 2, should give same result for back 1
+
+method 3.
+
+Tried obtaining the profile of flat background fluxed image.
+It is lower than the background I determined, but when scaled by 1.7 almost fit prefectly
+
+Not continuing this analysis and writing as before.
 
 
+PLAN: show uncorrected profiles, inner and outer background
+SCRATCH THAT, THE BACKGROUND IS REAL DSH AT CLOUDS AT LARGER RADII
+
+=========================================================================
+=========================================================================
+
+Background used: blanksky backgrounds
+
+Programs used:
+
+1. wrap_fluxed_rgb_chip7_mrad5_FLAT : get profiles from fluxed blank sky images
+2. wrap_fluxed_rgb_chip6_mrad5_FLAT
+3. wrap_fluxed_rgb_chip67mrad5_FLAT : combine profiles and subtract blanksky backgrounds.
+
+outputs IDL files are
+prof_rgbc6mrad5_flat.sav, prof_rgbc7mrad5_flat.sav
+prof_rgbc67mrad5_deflare_FLAT.sav
+output image is
+rgb_profc67mrad5_deflare_FLAT.eps
+
+=========================================================================
+========================================================================
 
 
