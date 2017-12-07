@@ -118,6 +118,45 @@ getprofile, fluxim, radius, prof, areas, AND optional parameters
 accepts fluxed images. (kind of stupid actually). Worse it uses image coordinates. I have to rewrite it.
 uses elimpointsrc, also copied.
 
+
+=========================================================================
+=========================================================================
+
+Background used: blanksky backgrounds
+
+Programs used:
+
+1. wrap_fluxed_rgb_chip7_mrad5_FLAT : get profiles from fluxed blank sky images
+2. wrap_fluxed_rgb_chip6_mrad5_FLAT
+3. wrap_fluxed_rgb_chip67mrad5_FLAT : combine profiles and subtract blanksky backgrounds.
+
+outputs IDL files are
+prof_rgbc6mrad5_flat.sav, prof_rgbc7mrad5_flat.sav
+prof_rgbc67mrad5_deflare_FLAT.sav
+output image is
+rgb_profc67mrad5_deflare_FLAT.eps
+
+=========================================================================
+========================================================================
+
+SBP modeling
+
+Programs used:
+1. sim_prof.pro : This program is written to simulate SBP for given dust parameters
+
+2. wrap_simprof_cont_man: for the chandra observation, wrapper for positions of cloud.
+
+3. wrap_simprof_cont_swift06fl.pro: for the T14 swift observation
+
+
+
+
+
+------------------------------OBSOLETE--------------------------------
+=========================================================================
+========================================================================
+OBSOLETE
+
 BACKGROUND METHODS
 
 1.
@@ -137,7 +176,7 @@ Tried for chip 7 only, up to 6keV
 Have not completed, but initial results show the same effect.
 
 3. Using fluxed backgrounds.
-HAVE NOT STARTED. SWITCHING TO up to 5keV.
+SWITCHING TO up to 5keV.
 
 Plan for wrapper:
 
@@ -166,25 +205,3 @@ Not continuing this analysis and writing as before.
 
 PLAN: show uncorrected profiles, inner and outer background
 SCRATCH THAT, THE BACKGROUND IS REAL DSH AT CLOUDS AT LARGER RADII
-
-=========================================================================
-=========================================================================
-
-Background used: blanksky backgrounds
-
-Programs used:
-
-1. wrap_fluxed_rgb_chip7_mrad5_FLAT : get profiles from fluxed blank sky images
-2. wrap_fluxed_rgb_chip6_mrad5_FLAT
-3. wrap_fluxed_rgb_chip67mrad5_FLAT : combine profiles and subtract blanksky backgrounds.
-
-outputs IDL files are
-prof_rgbc6mrad5_flat.sav, prof_rgbc7mrad5_flat.sav
-prof_rgbc67mrad5_deflare_FLAT.sav
-output image is
-rgb_profc67mrad5_deflare_FLAT.eps
-
-=========================================================================
-========================================================================
-
-
