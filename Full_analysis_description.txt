@@ -115,9 +115,9 @@ IDL Analysis:
  getprofile.pro
 getprofile, fluxim, radius, prof, areas, AND optional parameters
 
-accepts fluxed images. (kind of stupid actually). Worse it uses image coordinates. I have to rewrite it.
+accepts fluxed images. (kind of stupid actually). Worse it uses image coordinates. 
 uses elimpointsrc, also copied.
-
+ 
 
 =========================================================================
 =========================================================================
@@ -142,11 +142,15 @@ rgb_profc67mrad5_deflare_FLAT.eps
 SBP modeling
 
 Programs used:
-1. sim_prof.pro : This program is written to simulate SBP for given dust parameters
+1. sim_prof.pro : This program is written to simulate SBP for given dust parameters. The resolution is 10 pc. Divides the cloud into 10 pc regions so thin cloud criteria is satisfied. 
 
-2. wrap_simprof_cont_man: for the chandra observation, wrapper for positions of cloud.
+wrappers for near and far distances for Chandra, these use reid distances and also include a simple chi2 routine:
+2. wrap_simprof_cont_MC80_mde2reid.pro
+wrap_simprof_cont_MC80nd_mde2reid.pro
 
-3. wrap_simprof_cont_swift06fl.pro: for the T14 swift observation
+Swift wrappers:
+
+3. wrap_simprof_cont_swift06fl2_mdreid.pro: for the T14 swift observation. Others are similar, just keeping this in  github
 
 
 
@@ -205,3 +209,14 @@ Not continuing this analysis and writing as before.
 
 PLAN: show uncorrected profiles, inner and outer background
 SCRATCH THAT, THE BACKGROUND IS REAL DSH AT CLOUDS AT LARGER RADII
+
+==================
+=================
+SBP modeling
+
+Programs used:
+1. sim_prof.pro : This program is written to simulate SBP for given dust parameters
+
+2. wrap_simprof_cont_man: for the chandra observation, wrapper for positions of cloud - OBSOLETE, now fitting clouds.
+
+3. wrap_simprof_cont_swift06fl.pro: for the T14 swift observation
