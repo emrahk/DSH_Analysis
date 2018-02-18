@@ -1,1 +1,27 @@
 This directory holds all confirmed IDL programs for the DSH analysis.
+
+OBTAINING PROFILES FROM IMAGES:
+
+getprofile.pro : This program reads a Chandra fluxed image and plots the radial
+profile of the scattering halo around a source and calculates the surface brightness profile
+
+elimpointsrc.pro : This program removes circular regions centered on detected    point sources in images and calculates new areas in each annulus. Called by getprofile.pro
+
+wrappers for different chips:
+
+1. wrap_fluxed_rgb_chip7_mrad5_FLAT.pro : get profiles from fluxed blank sky images
+2. wrap_fluxed_rgb_chip6_mrad5_FLAT.pro
+3. wrap_fluxed_rgb_chip67_mrad5_FLAT.pro : combine profiles and subtract blanksky backgrounds.
+
+SBP MODELING
+
+1. sim_prof.pro : This program is written to simulate SBP for given dust parameters. The resolution is 10 pc. Divides the cloud into 10 pc regions so thin cloud criteria is satisfied.
+
+wrappers for near and far distances for Chandra, these use reid distances and also include a simple chi2 routine.
+
+wrap_simprof_cont_MC80_mde2reid.pro
+wrap_simprof_cont_MC80nd_mde2reid.pro
+
+For swift
+ wrap_simprof_cont_swift06fl2_mdreid.pro: for the T14 swift observation. Others are similar, just keeping this in  github
+
