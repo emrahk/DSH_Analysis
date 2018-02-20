@@ -22,6 +22,21 @@ wrappers for near and far distances for Chandra, these use reid distances and al
 wrap_simprof_cont_MC80_mde2reid.pro
 wrap_simprof_cont_MC80nd_mde2reid.pro
 
+How to run these wrappers:
+
+ restore,'resparex_reid_use1.sav' ; cloud parameters
+ restore,'parcloud_fit'
+ wrap_simprof_cont_MC80_mde2,resparex_reid, cloudpar=parcloud_fit, outsbp=sbpout_fit, syserr=0.04,/ps,fname='sbpfit.eps'
+
+Files you need:
+
+resparexXX.sav : a structure containing information about clouds obtained through fitting the CO spectrum with gaussians
+parcloud_XX.sav : input/output of results. Note that if you use a variable that has not been loaded, it will fill it with default values
+glcbin24.0h_regbg_hv0.csv : MAXI light curve in csv form.
+prof_rgbc67mrad5_deflare_FLAT.sav : profile obtained by image analysis (see above)
+
+copied into DATA directory
+
 For swift
  wrap_simprof_cont_swift06fl2_mdreid.pro: for the T14 swift observation. Others are similar, just keeping this in  github
 
