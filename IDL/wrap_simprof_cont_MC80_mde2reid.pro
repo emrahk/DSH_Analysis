@@ -41,6 +41,8 @@ pro wrap_simprof_cont_MC80_mde2reid, inpar, ps=ps, fname=namef, tdif=dift, $
 ;
 ; Created by EK, Dec 2017
 ;
+; Changing the DATA file directory to be compatible with DATA in GITHUB
+;
 
   IF NOT keyword_set(ps) THEN ps=0
   IF NOT keyword_set(namef) THEN namef='simprof_cont_MC80_mde2reid.eps'
@@ -67,7 +69,7 @@ ENDIF
 
 ;PLOT MAXI LIGHT CURVE 2-4 keV
 
-sed_data=read_csv('glcbin24.0h_regbg_hv0.csv')
+sed_data=read_csv('DATA/glcbin24.0h_regbg_hv0.csv')
 mjdm=sed_data.field1
 m24=sed_data.field4
 e24=sed_data.field5
@@ -249,7 +251,7 @@ ENDFOR
 ;norm4=0.3
 
 parcloud.sbpout=sbpout
-restore,'../CHIPvsBACKG5keV/prof_rgbc67mrad5_deflare_FLAT.sav'
+restore,'DATA/prof_rgbc67mrad5_deflare_FLAT.sav'
 
 ploterror,rad_im, NPROF_IM2C67FLATB[0,*],$
           NPROF_IM2C67FLATB[1,*]+NPROF_IM2C67FLATB[0,*]*errsys,$
