@@ -24,9 +24,9 @@ wrap_simprof_cont_MC80nd_mde2reid.pro
 
 How to run these wrappers:
 
- restore,'resparex_reid_use1.sav' ; cloud parameters
- restore,'parcloud_fit'
- wrap_simprof_cont_MC80_mde2,resparex_reid, cloudpar=parcloud_fit, outsbp=sbpout_fit, syserr=0.04,/ps,fname='sbpfit.eps'
+ restore,'DATA/resparex_reid_use1.sav' ; cloud parameters
+ restore,'DATA/parcloud_fit'
+ wrap_simprof_cont_MC80_mde2reid,resparex_reid, cloudpar=parcloud_reid, outsbp=sbpout_fit, syserr=0.04,/ps,fname='sbpfit.eps'
 
 Files you need:
 
