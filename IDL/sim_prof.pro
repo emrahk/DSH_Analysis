@@ -64,8 +64,9 @@ IF NOT SILENT THEN print, 'Cloud at ',x*D
         Omega=((theta_sc/1000.)^(-alpha))*meanE^(-beta)
         intensity=Foft[i]*Omega/(1-xn)^2.
         prof[j-1,0,i]=theta
-        prof[j-1,1,i]=intensity
+        prof[j-1,1,i]=intensity	
      ENDFOR
+     ;PRINT, j, i & STOP
   ENDFOR
 
 ;  print,xn,D,xn*D
@@ -91,7 +92,6 @@ IF NOT noplot THEN oplot, prof[k,0,*], prof[k,1,*]
      ENDFOR
      totprof=totprof/float(thcl_ind+1) ; normalize totprof
 ENDIF
-
 
 IF NOT noplot THEN plot,findgen(600L),totprof,line=2
 

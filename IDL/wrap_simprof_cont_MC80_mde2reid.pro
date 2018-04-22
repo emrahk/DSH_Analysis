@@ -44,6 +44,9 @@ pro wrap_simprof_cont_MC80_mde2reid, inpar, ps=ps, fname=namef, tdif=dift, $
 ; Changing the DATA file directory to be compatible with DATA in GITHUB
 ;
 
+COMMON myVars, xn_arr, weight, time_hires, Foft_hires, tobs
+
+
   IF NOT keyword_set(ps) THEN ps=0
   IF NOT keyword_set(namef) THEN namef='simprof_cont_MC80_mde2reid.eps'
   IF NOT keyword_set(dift) THEN dift=0
@@ -64,6 +67,9 @@ IF ps THEN BEGIN
    !p.font=0
    device,/times
 ENDIF  
+
+LOADCT, 39
+DEVICE, decomposed = 0
 
 !p.multi=[0,1,2]
 
@@ -90,10 +96,10 @@ sflux24=[0.00110, 0.000471,0.000305,0.000076]
 sflux15=[0.00165,0.000772,0.000494,0.000124]
 
 plotsym,0,/fill
-oplot,sdates-50000.,sflux24,psym=8,color=0
+oplot,sdates-50000.,sflux24,psym=8,color=250
 
 ;oploterror,mjdm,m410,e410,psym=5,/nohat
-oplot,[chand,chand]-50000.,10^(!y.crange),color=0,line=2,thick=2
+oplot,[chand,chand]-50000.,10^(!y.crange),color=250,line=2,thick=2
 
 ;arrow, chand-50000., 0.3, chand-50000., 1E-5, /data, color=0
 
@@ -119,7 +125,7 @@ Foft_add=F[n_elements(F)-1L]*exp(-dd*edecay) ;
 Foft=[F,Foft_add]
 
 ;Foft=[F,0.05,0.045,0.04,0.035,0.03,0.025,0.02,0.015,0.01,0.005]
-oplot,t0+indgen(floor(tl-t0)+28)-50000.,Foft,color=0
+oplot,t0+indgen(floor(tl-t0)+28)-50000.,Foft,color=250
 
 ; parcloud is a structure that holds information up to 50 clouds
 ; IF given use parameters inside, if not enter defaults
@@ -194,24 +200,27 @@ IF pass EQ 0 THEN BEGIN
       parcloud.weight[k]=totweight/cloudnc
    ENDFOR
    
-ENDIF
+ENDIF ELSE parcloud_input = parcloud
 
+;STOP
 
-  
 ;calculate the main cloud parameter first
 ;there are some magic numbers, but this is a wrapper
 
 x=parcloud.x[0]
 D=parcloud.distance
 IF NOT SILENT THEN print, 'Distance to source is: '+string(strtrim(D,1))+' kpc'
-alpha=parcloud.alpha[0]
-beta=parcloud.beta[0]
+alpha=parcloud.alpha[0] ;fixed to 3
+beta=parcloud.beta[0]	;fixed to 3
 meanE=parcloud.meanE[0]
 thcl=parcloud.thcl[0]
+  
 
 ;simulate profile from the first cloud, total emission
 sim_prof, x, D, alpha, beta, meanE, Foft, chand-t0, totprof1, clth=thcl,$
           /noplot,silent=silent
+
+;print, transpose(sbpout[0,100:200])-totprof1[100:200]  ;=0 
 
 sbpout=dblarr(parcloud.ncloud,n_elements(totprof1)) ;create an output profile array
 sbpout[0,*]=totprof1
@@ -242,6 +251,8 @@ FOR i=1, parcloud.ncloud-1 DO BEGIN
    totwi=total(parcloud.weight[xx])
    parcloud.absf[i]=exp(totwi*perwfac)
    sbptot=sbptot+parcloud.norm*totprofi*parcloud.weight[i]*parcloud.absf[i]
+   
+
 ENDFOR
 
 ;   norm2=.015
@@ -249,6 +260,7 @@ ENDFOR
 ;x=0.8
 ;thcl=.05
 ;norm4=0.3
+
 
 parcloud.sbpout=sbpout
 restore,'DATA/prof_rgbc67mrad5_deflare_FLAT.sav'
@@ -273,7 +285,7 @@ ENDIF
    
 ;oplot,s_radius,psf_norm,color=0,line=2,psym=10
 
-oplot, findgen(600),sbptot, color=50, line=2, thick=4
+oplot, findgen(600),sbptot, color=50, line=2, thick=4  ;plots the total absorbed profiles
 
 FOR i=0,parcloud.ndcloud-1 DO oplot,findgen(600),sbpout[i,*]*parcloud.norm*parcloud.weight[i],color=100,line=1,thick=2
 
@@ -296,10 +308,52 @@ redchi=total(((NPROF_IM2C67FLATB[0,yy]-sbmatch)/toterr)^2.)/dof
 IF NOT SILENT THEN print, 'Reduced chi2: ',redchi
 chi2tot=total(((NPROF_IM2C67FLATB[0,yy]-sbmatch)/toterr)^2.)
 
+;-----------
+
+data_x = rad_im
+data_y = NPROF_IM2C67FLATB[0,*]
+data_e = NPROF_IM2C67FLATB[1,*]+NPROF_IM2C67FLATB[0,*]*errsys
+
+ploterror,data_x, data_y, data_e,$
+          yr=[1e-10,0.7e-8], xr=[0,600],/nohat, xtitle='Radius (arcsec)', $
+          ytitle='ph cm!E-2!N s!E-1!N asec!E-2!N',charsize=1.3,ylog=logy
+
+p0 = [11.5, 6.e-9]  ;initial values
+nparam = 2
+myparinfo = REPLICATE({fixed:0, limited:[1,0], limits:[0.0,0.0]}, nparam)
+
+t0=57625.  ;start of outburst
+tl=57761.  ;end of dates that we use maxi data
+chand=57789.4 ;date of chandra (or earlier observations)
+src_time = Findgen(floor(tl-t0)+28)
+tobs = chand-t0
+src_time[N_ELEMENTS(src_time)-1] = tobs ;set the max time to chandra time
+
+hires = 5000.
+time_hires = FINDGEN(hires)*(MAX(src_time)-MIN(src_time))/(hires-1) + MIN(src_time)
+Foft_hires = INTERPOL(foft, src_time, time_hires)
+
+xn_arr = parcloud.x
+weight = parcloud.weight
+
+;result = SBP_MODEL(data_x, p0)
+
+model_fit = MPFITFUN('SBP_MODEL', data_x, data_y, data_e, p0)
+OPLOT, data_x, SBP_MODEL(data_x, model_fit), color = 200	   ; Plot model
+
+
+
+
+
+
+
+
+;-----------
+STOP
+
 IF ps THEN BEGIN
    device,/close
    set_plot,'x'
 ENDIF
-
 
 END
