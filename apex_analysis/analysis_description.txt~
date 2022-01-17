@@ -1,0 +1,24 @@
+This document describes the analysis steps and codes (with how they are called) to analyze the apex data together with the Chandra data.
+
+Codes:
+
+fitcoprofile_apex, infile, outpar, ps=ps, fname=namef
+
+This program fits and plots CO J=1-0 (or any given) map with multiple gausses
+saves important results like integrated velocities and near and far distances
+
+OUTPUT
+outpar: structure that holds information on gauss profiles, integrated profiles, and near and far distances
+
+dependencies
+uses gaussfits.pro which compiles gauss_fits.pro, and uses gauss_fx.pro
+
+EXAMPLE
+
+
+Problems, to be checked again:
+MC 73-74 complex, MC 73 tiny
+60-70 empty, but it is an important region.
+Ask how the integrated velocity curves are obtained....
+
+

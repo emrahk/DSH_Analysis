@@ -1,0 +1,86 @@
+This document describes the analysis steps and codes (with how they are called) to analyze the apex data together with the Chandra data.
+
+Codes:
+
+1.
+fitcoprofile_apex, infile, outpar, ps=ps, fname=namef
+
+This program fits and plots CO J=1-0 (or any given) map with multiple gausses
+saves important results like integrated velocities and near and far distances
+
+OUTPUT
+outpar: structure that holds information on gauss profiles, integrated profiles, and near and far distances
+
+dependencies
+uses gaussfits.pro which compiles gauss_fits.pro, and uses gauss_fx.pro
+
+EXAMPLE
+
+figures/apex_gauss.eps
+
+Problems, to be checked again:
+MC 73-74 complex, MC 73 tiny
+60-70 empty, but it is an important region.
+Ask how the integrated velocity curves are obtained....
+Compare with Maria s results given in lines_list_v2.txt and spec2.png
+
+2.
+plot_combimage, inpfits, vrange, outim, ps=ps, fname=namef, $
+                    useavg=useavg, maxscl=sclmax
+
+; This program reads an image cube fits file and then plots a combined
+; image with the given velocity range
+
+; OUTPUTS
+;
+; outim: combined image
+
+EXAMPLE:
+
+inpfits='apex_cubes/4U1630_12CO.fits'
+plot_combimage,inpfits, [-90.,-75], outim,/useavg
+
+plots are created as sum (not using /useavg):
+
+figures/comb_75_90.eps
+
+Problems, to be checked again:
+To enlarge figure a rebinning is performed, and there are magic numbers in it. scaling is a little arbitrary. A pure non-rebinned version without magic numbers should be written for a proper analysis.
+
+3.
+function ang_analysis, inpimg, cdelt, rin, rout, theta, del_theta, $
+                       offset=setoff, plot=plot, ps=ps, fname=namef
+
+; This program calculates the brightness of a wedge with inner radius
+; rin, outer radius rout from the given center, theta-del_theta/2 to
+;  theta+del_theta/2 where theta is the angle from the x axis.
+
+OUTPUTS
+;
+; returns sum of pixels in the wedge
+
+EXAMPLE:
+
+outim: output of plot_combimage
+ang_analysis(outim, cdelt, 90., 170., 345, 30, /plot)
+
+results: images not saved. Still developing.
+
+Problems, to be checked again:
+1. Magic numbers, still specific to apex - must be used for Chandra as well
+2. Cannot handle negative angles well
+3. boundary angles (0, 180) etc seems problematic
+
+TODO:
+
+1. fix combimage to produce bare 28x28 avg or sum images with no rebinning.
+2. Fix angular_analysis magic numbers and bugs
+3. apply to non-rebinned combimage results
+4. expand (or use as base) to write a similar code for the Chandra analysis. 
+
+
+
+
+
+
+

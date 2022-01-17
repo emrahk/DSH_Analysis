@@ -1,0 +1,106 @@
+######################
+Region -95 to -60 km/s:
+######################
+
+13CO:
+
+    [0]: <Gaussian1D(amplitude=0.64505859 k, mean=-80.63932858 km / s, stddev=3.1440122 km / s)>
+
+    [1]: <Gaussian1D(amplitude=0.36304144 k, mean=-73.30025389 km / s, stddev=1.8747938 km / s)>
+
+    Reduced Chi Squared: 0.001571825688957942 k2
+
+    [0]: <Gaussian1D(amplitude=0.67157073 k, mean=-80.64303248 km / s, stddev=2.49439054 km / s)>
+
+    [1]: <Gaussian1D(amplitude=0.39227441 k, mean=-73.74286656 km / s, stddev=2.23132019 km / s)>
+
+    [2]: <Gaussian1D(amplitude=0.13685939 k, mean=-85.43793085 km / s, stddev=1.20478519 km / s)>
+
+    Reduced Chi Squared: 0.0015458428385829695 k2
+
+    [0]: <Gaussian1D(amplitude=0.67625909 k, mean=-80.61006741 km / s, stddev=1.70322606 km / s)>
+
+    [1]: <Gaussian1D(amplitude=0.41000589 k, mean=-73.45077048 km / s, stddev=1.86528163 km / s)>
+
+    [2]: <Gaussian1D(amplitude=0.26230742 k, mean=-84.48570004 km / s, stddev=1.71974945 km / s)>
+
+    [3]: <Gaussian1D(amplitude=0.26847631 k, mean=-77.14875692 km / s, stddev=1.27394961 km / s)>
+ 
+     Reduced Chi Squared: 0.0015263511944417381 k2
+
+12CO:
+
+    [0]: <Gaussian1D(amplitude=3.78417025 k, mean=-80.67879081 km / s, stddev=3.53616887 km / s)>
+
+    [1]: <Gaussian1D(amplitude=1.70424541 k, mean=-72.45598564 km / s, stddev=2.53766529 km / s)>	
+
+     Reduced Chi Squared: 0.08129467626578389 k2
+
+    [0]: <Gaussian1D(amplitude=3.39851749 k, mean=-80.38300486 km / s, stddev=2.24756944 km / s)>
+
+    [1]: <Gaussian1D(amplitude=2.05214638 k, mean=-73.80179472 km / s, stddev=3.44311898 km / s)>
+
+    [2]: <Gaussian1D(amplitude=1.446601 k, mean=-84.66617924 km / s, stddev=2.19876322 km / s)>
+
+     Reduced Chi Squared: 0.08039275400829911 k2
+
+    [0]: <Gaussian1D(amplitude=3.0379688 k, mean=-80.77165901 km / s, stddev=1.67560049 km / s)>
+
+    [1]: <Gaussian1D(amplitude=2.13805069 k, mean=-74.15710984 km / s, stddev=3.63114707 km / s)>
+
+    [2]: <Gaussian1D(amplitude=1.79168123 k, mean=-84.37871195 km / s, stddev=2.17341227 km / s)>
+
+    [3]: <Gaussian1D(amplitude=1.05894783 k, mean=-78.18991316 km / s, stddev=1.15268014 km / s)>
+   
+     Reduced Chi Squared: 0.08010300792762368 k2 
+
+#######################
+Region -115 to -95 km/s:
+#######################
+
+13CO:
+
+    [0]: <Gaussian1D(amplitude=0.3724892 k, mean=-105.15528491 km / s, stddev=0.76616072 km / s)>
+
+    [1]: <Gaussian1D(amplitude=0.07652392 k, mean=-99.38615497 km / s, stddev=1.24616733 km / s)>
+
+    [2]: <Gaussian1D(amplitude=0.08355757 k, mean=-107.3289081 km / s, stddev=2.57416083 km / s)>
+
+     Reduced Chi Squared: 0.012562347726402866
+
+12CO:
+
+    [0]: <Gaussian1D(amplitude=1.51354924 k, mean=-105.12713153 km / s, stddev=0.98188364 km / s)>
+
+    [1]: <Gaussian1D(amplitude=0.66811472 k, mean=-99.29389833 km / s, stddev=1.58472306 km / s)>
+
+    [2]: <Gaussian1D(amplitude=0.72410371 k, mean=-107.37035831 km / s, stddev=2.46606009 km / s)>
+
+     Reduced Chi Squared: 0.5012773440888448 k2
+
+######################
+Region -50 to -30 km/s:
+######################
+
+12CO:
+
+   [0]: <Gaussian1D(amplitude=1.23065486 k, mean=-38.61662864 km / s, stddev=1.13508349 km / s)>
+
+    [1]: <Gaussian1D(amplitude=0.56164622 k, mean=-34.5117055 km / s, stddev=1.81780226 km / s)>
+
+    [2]: <Gaussian1D(amplitude=0.58654241 k, mean=-42.29213036 km / s, stddev=1.2581028 km / s)>
+
+    [3]: <Gaussian1D(amplitude=0.47081885 k, mean=-47.33798778 km / s, stddev=1.45321853 km / s)>
+
+     Reduced Chi Squared: 0.5211279237775727 k2
+
+
+######################
+Region -30 to -10 km/s:
+######################
+
+12CO:
+
+    [0]: <Gaussian1D(amplitude=0.7769256069903103 k, mean= -19.040458168987342 km / s,  0.8529731681008178 km / s)>
+
+    Reduced Chi Squared: 0.5108494938584464 k2
