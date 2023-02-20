@@ -1,4 +1,4 @@
-pro specring, infile, specv, vel, radlim=limrad, ps=ps, fname=namef, allspec=specvall
+pro specring, infile, specv, vel, radlim=limrad, ps=ps, fname=namef, allspec=specall
   
 ;This program reads a FITS header and images, and find the spectrum in
 ;the given radial limits
